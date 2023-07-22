@@ -6,6 +6,7 @@ public class InputManager : MonoBehaviour
 {
     void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             if (Rhythm.opportunity)
@@ -17,5 +18,6 @@ public class InputManager : MonoBehaviour
                 Rhythm.NoteMiss();
             }
         }
+        */
     }
 }
