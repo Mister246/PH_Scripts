@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class Rhythm : MonoBehaviour
 {
-    static public bool opportunity;
-    public float opportunityWindow;
     public float bpm;
     public float timeBetweenBeats;
 
     void Start()
     {
-        opportunity = false;
-        opportunityWindow = 0.16f;
         bpm = 120f;
         timeBetweenBeats = 60f / bpm;
     }
