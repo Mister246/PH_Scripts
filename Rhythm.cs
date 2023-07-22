@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Rhythm : MonoBehaviour
 {
+    public bool opportunity;
     public float opportunityWindow;
     public float bpm;
     public float timeBetweenBeats;
 
     void Start()
     {
-        opportunityWindow = 0.16f;
+        opportunity = false;
+        opportunityWindow = 0.08f;
         bpm = 120f;
         timeBetweenBeats = 60f / bpm;
         StartCoroutine(ExecuteRhythm(timeBetweenBeats));
@@ -18,17 +20,27 @@ public class Rhythm : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0) && opportunity)
         {
-            Debug.Log("mouse clicked");
+            NoteHit();
         }    
+        else if (Input.GetKeyDown(KeyCode.Mouse0) && !opportunity)
+        {
+            NoteMiss();
+        }
     }
 
     public IEnumerator ExecuteRhythm(float timeBetweenBeats)
     {
-        yield return new WaitForSeconds(timeBetweenBeats);
+        yield return new WaitForSeconds(timeBetweenBeats - opportunityWindow);
+        opportunity = true;
+
+        yield return new WaitForSeconds(opportunityWindow);
         AudioManager.audioSource.pitch = Random.Range(0.95f, 1.05f);
         AudioManager.audioSource.Play();
+
+        yield return new WaitForSeconds(opportunityWindow);
+        opportunity = false;
         StartCoroutine(ExecuteRhythm(timeBetweenBeats));
     }
 
