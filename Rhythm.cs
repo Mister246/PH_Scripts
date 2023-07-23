@@ -17,10 +17,14 @@ public class Rhythm : MonoBehaviour
 
     void Update()
     {
-        foreach (Intervals interval in intervals)
+        if (MusicManagement.audioSource.isPlaying)
+        // if music is playing
         {
-            float sampledTime = MusicManagement.audioSource.timeSamples / (MusicManagement.audioSource.clip.frequency * interval.GetIntervalLength(bpm));
-            interval.CheckForNewInterval(sampledTime);
+            foreach (Intervals interval in intervals)
+            {
+                float sampledTime = MusicManagement.audioSource.timeSamples / (MusicManagement.audioSource.clip.frequency * interval.GetIntervalLength(bpm));
+                interval.CheckForNewInterval(sampledTime);
+            }
         }
     }
 
