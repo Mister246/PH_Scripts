@@ -6,15 +6,12 @@ public class MusicManagement : MonoBehaviour
 {
     static public MusicManagement musicManager;
     static public AudioSource audioSource;
-
-    // music
     public AudioClip[] musicTracks;
 
     void Start()
     {
         musicManager = this;
         audioSource = GetComponent<AudioSource>();
-        PlayMusic("Get Down Funk");
     }
 
     static public void PlayMusic(string trackName)
