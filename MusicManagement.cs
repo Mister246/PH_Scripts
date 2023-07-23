@@ -14,22 +14,23 @@ public class MusicManagement : MonoBehaviour
     {
         musicManager = this;
         audioSource = GetComponent<AudioSource>();
+        PlayMusic("Get Down Funk");
     }
 
     static public void PlayMusic(string trackName)
     {
-        audioSource.clip = musicManager.GetMusicTrack(trackName);
-        audioSource.Play();
-    }
-
-    public AudioClip GetMusicTrack(string trackName)
-    {
-        foreach (AudioClip music in musicTracks)
+        AudioClip GetMusicTrack(string trackName)
         {
-            if (music.name == trackName) return music;
+            foreach (AudioClip music in musicManager.musicTracks)
+            {
+                if (music.name == trackName) return music;
+            }
+
+            Debug.Log($"ERROR: Unable to find music track {trackName}");
+            return null;
         }
 
-        Debug.Log($"ERROR: Unable to find music track {trackName}");
-        return null;
+        audioSource.clip = GetMusicTrack(trackName);
+        audioSource.Play();
     }
 }
